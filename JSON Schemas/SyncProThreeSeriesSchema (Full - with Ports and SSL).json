@@ -1,0 +1,293 @@
+{
+    "properties": {
+        "spaceInfo": {
+            "$id": "#/properties/spaceInfo",
+            "type": "object",
+            "title": "Space Information",
+            "properties": {
+                "latitude": {
+                    "$id": "#/properties/generalProperties/properties/latitude",
+                    "type": "number",
+                    "title": "Space's Latitude",
+                    "readOnly": false
+                },
+                "longtitude": {
+                    "$id": "#/properties/generalProperties/properties/longtitude",
+                    "type": "number",
+                    "title": "Space's Longtitude",
+                    "readOnly": false
+                },
+                "dateTime": {
+                    "$id": "#/properties/generalProperties/properties/dateTime",
+                    "type": "string",
+                    "format": "date-time",
+                    "title": "Space's Date and Time",
+                    "readOnly": false
+                }
+            }
+        },
+        "deviceInfo": {
+            "$id": "#/properties/deviceInfo",
+            "type": "object",
+            "title": "Device Information",
+            "properties": {
+                "type": {
+                    "$id": "#/properties/generalProperties/properties/type",
+                    "type": "string",
+                    "title": "Device's Type",
+                    "readOnly": false
+                },
+                "mode": {
+                    "$id": "#/properties/generalProperties/properties/mode",
+                    "type": "string",
+                    "title": "Device's Model",
+                    "readOnly": false
+                },
+                "name": {
+                    "$id": "#/properties/generalProperties/properties/name",
+                    "type": "string",
+                    "title": "Device's Name",
+                    "readOnly": false
+                },
+                "manifestUrl": {
+                    "$id": "#/properties/generalProperties/properties/manifestUrl",
+                    "type": "string",
+                    "title": "Device's Manifest",
+                    "readOnly": false
+                }
+            }
+        },
+        "generalProperties": {
+            "$id": "#/properties/generalProperties",
+            "type": "object",
+            "title": "General Properties",
+            "description": "Device's General Properties",
+            "required": [],
+            "properties": {
+                "fwVersion": {
+                    "$id": "#/properties/generalProperties/properties/fwVersion",
+                    "type": "string",
+                    "title": "Device's firmware version",
+                    "readOnly": true
+                },
+                "programIDTag": {
+                    "$id": "#/properties/generalProperties/properties/programIDTag",
+                    "type": "string",
+                    "title": "Device's Program ID Tag",
+                    "readOnly": true
+                }
+            }
+        },
+        "networkProperties": {
+            "$id": "#/properties/networkProperties",
+            "type": "object",
+            "title": "Network",
+            "description": "Device's Network Properties",
+            "required": [],
+            "properties": {
+                "macAddress": {
+                    "$id": "#/properties/networkProperties/properties/macAddress",
+                    "type": "string",
+                    "title": "MAC Address",
+                    "readOnly": true
+                },
+                "dhcp": {
+                    "$id": "#/properties/networkProperties/properties/dhcp",
+                    "type": "boolean",
+                    "title": "DHCP"
+                },
+                "staticIpAddress": {
+                    "$id": "#/properties/networkProperties/properties/staticIpAddress",
+                    "type": "string",
+                    "format": "ipv4",
+                    "title": "IP Address",
+                    "description": "Device's ip address"
+                },
+                "staticNetMask": {
+                    "$id": "#/properties/networkProperties/properties/staticNetMask",
+                    "type": "string",
+                    "format": "ipv4",
+                    "title": "Mask Address",
+                    "description": "Device's mask address",
+                    "default": "255.255.255.0"
+                },
+                "staticDefRouter": {
+                    "$id": "#/properties/networkProperties/properties/staticDefRouter",
+                    "type": "string",
+                    "format": "ipv4",
+                    "title": "Default Gateway",
+                    "description": "Device's default Gateway"
+                },
+                "hostName": {
+                    "$id": "#/properties/networkProperties/properties/hostName",
+                    "type": "string",
+                    "format": "hostname",
+                    "title": "Hostname",
+                    "description": "Device's Hostname"
+                },
+                "domainName": {
+                    "$id": "#/properties/networkProperties/properties/domainName",
+                    "type": "string",
+                    "title": "Domain Name",
+                    "description": "Device's Domain"
+                },
+                "cipPort": {
+                    "$id": "#/properties/networkProperties/properties/cipPort",
+                    "type": "string",
+                    "title": "CIP Port",
+                    "description": "Device's CIP Port",
+                    "options": {"hidden": true}
+                },
+                "ctpPort": {
+                    "$id": "#/properties/networkProperties/properties/ctpPort",
+                    "type": "string",
+                    "title": "CTP Port",
+                    "description": "Device's CTP Port"
+                },
+                "webPort": {
+                    "$id": "#/properties/networkProperties/properties/webPort",
+                    "type": "string",
+                    "title": "Web Port",
+                    "description": "Device's Web Port"
+                },
+                "securedCipPort": {
+                    "$id": "#/properties/networkProperties/properties/securedCipPort",
+                    "type": "string",
+                    "title": "Secured CIP Port",
+                    "description": "Device's Secured CIP Port"
+                },
+                "securedCtpPort": {
+                    "$id": "#/properties/networkProperties/properties/securedCtpPort",
+                    "type": "string",
+                    "title": "Secured CTP Port",
+                    "description": "Device's Secured CTP Port"
+                },
+                "securedWebPort": {
+                    "$id": "#/properties/networkProperties/properties/securedWebPort",
+                    "type": "string",
+                    "title": "Secured Web Port",
+                    "description": "Device's Secured Web Port"
+                },
+                "sslCertificate": {
+                    "$id": "#/properties/networkProperties/properties/sslCertificate",
+                    "type": "string",
+                    "title": "SSL Certificate",
+                    "description": "Device's SSL Certificate Mode",
+                    "enum": [
+                        "Self",
+                        "CA",
+                        "None"
+                    ]
+                },
+                "dnsServers": {
+                    "$id": "#/properties/networkProperties/properties/sslCertificate",
+                    "type": "array",
+                    "title": "DNS Servers",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "description": "Device's SSL Certificate Mode",
+                    "items": {
+                        "type": "string",
+                        "format": "ipv4"
+                    }
+                }
+            },
+            "dependencies": {
+                "dhcp": {
+                    "oneOf": [
+                        {
+                            "properties": {
+                                "dhcp": {
+                                    "enum": [
+                                        true
+                                    ]
+                                },
+                                "ipAddress": {
+                                    "readOnly": true
+                                },
+                                "maskAddress": {
+                                    "readOnly": true
+                                },
+                                "defaultGateway": {
+                                    "readOnly": true
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "dhcp": {
+                                    "enum": [
+                                        false
+                                    ]
+                                },
+                                "ipAddress": {
+                                    "readOnly": false
+                                },
+                                "maskAddress": {
+                                    "readOnly": false
+                                },
+                                "defaultGateway": {
+                                    "readOnly": false
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "ipTableProperties": {
+            "$id": "#/properties/IPTableProperties",
+            "type": "object",
+            "title": "IP Table",
+            "description": "Device's IP Table Properties",
+            "options":{"hidden":true}
+        },
+        "authenticationProperties": {
+            "$id": "#/properties/authenticationProperties",
+            "type": "object",
+            "title": "authentication",
+            "description": "Device's Authentication Properties",
+            "required": [],
+            "properties": {
+                "authEnabled": {
+                    "$id": "#/properties/authenticationProperties/properties/authEnabled",
+                    "type": "boolean",
+                    "title": "Enable Authentication"
+                },
+                "authUsername": {
+                    "$id": "#/properties/authenticationProperties/properties/authUsername",
+                    "type": "string",
+                    "title": "Username"
+                },
+                "authPassword": {
+                    "$id": "#/properties/authenticationProperties/properties/authPassword",
+                    "type": "string",
+                    "format": "password",
+                    "title": "Password"
+                },
+                "authPasswordRetype": {
+                    "$id": "#/properties/authenticationProperties/properties/authPasswordRetype",
+                    "type": "string",
+                    "format": "password",
+                    "title": "Password"
+                }
+            },
+            "if": {
+                "properties": {
+                    "authEnabled": {
+                        "const": true
+                    }
+                }
+            },
+            "then": {
+                "required": [
+                    "authUsername,authPassword,authPasswordRetype"
+                ]
+            },
+            "else": {
+                "required": []
+            }
+        }
+    },
+    "definitions": {}
+}

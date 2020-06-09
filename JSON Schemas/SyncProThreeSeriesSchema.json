@@ -1,0 +1,217 @@
+{
+    "properties": {
+        "generalProperties": {
+            "$id": "#/properties/generalProperties",
+            "type": "object",
+            "title": "General Properties",
+            "description": "Device's General Properties",
+            "required": [],
+            "properties": {
+                "fwVersion": {
+                    "$id": "#/properties/generalProperties/properties/fwVersion",
+                    "type": ["string","null"],
+                    "title": "Device's firmware version (Reported)",
+                    "readOnly": true
+                },
+                "programIDTag": {
+                    "$id": "#/properties/generalProperties/properties/programIDTag",
+                    "type": ["string","null"],
+                    "title": "Device's Program ID Tag (Reported)",
+                    "readOnly": true
+                }
+            }
+        },
+        "networkProperties": {
+            "$id": "#/properties/networkProperties",
+            "type": "object",
+            "title": "Network",
+            "description": "Device's Network Properties",
+            "required": [],
+            "properties": {
+                "macAddress": {
+                    "$id": "#/properties/networkProperties/properties/macAddress",
+                    "type": ["string","null"],
+                    "title": "MAC Address (Reported)",
+                    "readOnly": true
+                },
+                "dhcp": {
+                    "$id": "#/properties/networkProperties/properties/dhcp",
+                    "type": "boolean",
+                    "title": "DHCP",
+                    "default":true
+                },
+                "staticIpAddress": {
+                    "$id": "#/properties/networkProperties/properties/staticIpAddress",
+                    "type": ["string","null"],
+                    "format": "ipv4",
+                    "title": "IP Address",
+                    "description": "Device's ip address"
+                },
+                "staticNetMask": {
+                    "$id": "#/properties/networkProperties/properties/staticNetMask",
+                    "type": ["string","null"],
+                    "format": "ipv4",
+                    "title": "Mask Address",
+                    "description": "Device's mask address"
+                },
+                "staticDefRouter": {
+                    "$id": "#/properties/networkProperties/properties/staticDefRouter",
+                    "type": ["string","null"],
+                    "format": "ipv4",
+                    "title": "Default Gateway",
+                    "description": "Device's default Gateway"
+                },
+                "hostName": {
+                    "$id": "#/properties/networkProperties/properties/hostName",
+                    "type": ["string","null"],
+                    "format": "hostname",
+                    "title": "Hostname",
+                    "description": "Device's Hostname"
+                },
+                "domainName": {
+                    "$id": "#/properties/networkProperties/properties/domainName",
+                    "type": ["string","null"],
+                    "title": "Domain Name",
+                    "description": "Device's Domain"
+                },
+                "dnsServers": {
+                    "$id": "#/properties/networkProperties/properties/dnsServers",
+                    "type": "array",
+                    "title": "DNS Servers",
+                    "minItems": 0,
+                    "maxItems": 3,
+                    "description": "Device's DNS Servers",
+                    "items": {
+                        "type": ["string","null"]
+                    }
+                }
+            },
+            "dependencies": {
+                "dhcp": {
+                    "oneOf": [
+                        {
+                            "properties": {
+                                "dhcp": {
+                                    "enum": [
+                                        true
+                                    ]
+                                },
+                                "staticIpAddress": {
+                                    "readOnly": true
+                                },
+                                "staticNetMask": {
+                                    "readOnly": true
+                                },
+                                "staticDefRouter": {
+                                    "readOnly": true
+                                },
+                                "dnsServers": {
+                                    "maxItems":0,
+                                    "readOnly": true
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "dhcp": {
+                                    "enum": [
+                                        false
+                                    ]
+                                },
+                                "staticIpAddress": {
+                                    "readOnly": false
+                                },
+                                "staticNetMask": {
+                                    "readOnly": false
+                                },
+                                "staticDefRouter": {
+                                    "readOnly": false
+                                },
+                                "dnsServers": {
+                                    "maxItems":3,
+                                    "readOnly": false
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "authenticationProperties":{
+            "$id": "#/properties/authenticationProperties",
+            "type": "object",
+            "title": "Authentication Properties",
+            "description": "Device's Authentication Properties",
+            "properties":{
+                "authEnabled":{
+                    "$id": "#/properties/authenticationProperties/properties/authEnabled",
+                    "type": "boolean",
+                    "title": "Enable Authentication"
+                },
+                "username":{
+                    "$id": "#/properties/authenticationProperties/properties/username",
+                    "type": "string",
+                    "title": "Username"
+                },
+                "password":{
+                    "$id": "#/properties/authenticationProperties/properties/password",
+                    "type": "string",
+                    "minLength":6,
+                    "format": "password",
+                    "title": "Password"
+                },
+                "verifyPassword":{
+                    "$id": "#/properties/authenticationProperties/properties/verifyPassword",
+                    "type": "string",
+                    "minLength":6,
+                    "format": "password",
+                    "title": "Verify Password"
+                }
+            },
+            "dependencies": {
+                "authEnabled": {
+                    "oneOf": [
+                        {
+                            "properties": {
+                                "authEnabled": {
+                                    "enum": [
+                                        true
+                                    ]
+                                },
+                                "username": {
+                                    "readOnly": false
+                                },
+                                "password": {
+                                    "readOnly": false
+                                },
+                                "verifyPassword": {
+                                    "readOnly": false
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "authEnabled": {
+                                    "enum": [
+                                        false
+                                    ]
+                                },
+                                "username": {
+                                    "readOnly": true
+                                },
+                                "password": {
+                                    "readOnly": true
+                                },
+                                "verifyPassword": {
+                                    "readOnly": true
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+
+    },
+    "definitions": {}
+}

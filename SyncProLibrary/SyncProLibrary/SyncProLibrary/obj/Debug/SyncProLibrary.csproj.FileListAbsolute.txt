@@ -1,0 +1,20 @@
+C:\Users\OmerBrookstein\Dropbox (Personal)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SyncProLibrary.dll
+C:\Users\OmerBrookstein\Dropbox (Personal)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SyncProLibrary.pdb
+C:\Users\OmerBrookstein\Dropbox (Personal)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SimplSharpCustomAttributesInterface.dll
+C:\Users\OmerBrookstein\Dropbox (Personal)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SimplSharpHelperInterface.dll
+C:\Users\OmerBrookstein\Dropbox (Personal)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\OmerBrookstein\Dropbox (Personal)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\obj\Debug\SyncProLibrary.dll
+C:\Users\OmerBrookstein\Dropbox (Personal)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\obj\Debug\SyncProLibrary.pdb
+C:\Users\OmerBrookstein\Dropbox (Personal)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SimplSharpNewtonsoft.dll
+C:\Users\OmerBrookstein\Dropbox (Personal)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SimplSharpReflectionInterface.dll
+C:\Users\OmerBrookstein\Dropbox (Personal)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SimplSharpSQLHelperInterface.dll
+C:\Users\OmerBrookstein\Dropbox (Crestron Israel)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SyncProLibrary.dll
+C:\Users\OmerBrookstein\Dropbox (Crestron Israel)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SyncProLibrary.pdb
+C:\Users\OmerBrookstein\Dropbox (Crestron Israel)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SimplSharpCustomAttributesInterface.dll
+C:\Users\OmerBrookstein\Dropbox (Crestron Israel)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SimplSharpHelperInterface.dll
+C:\Users\OmerBrookstein\Dropbox (Crestron Israel)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SimplSharpNewtonsoft.dll
+C:\Users\OmerBrookstein\Dropbox (Crestron Israel)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SimplSharpReflectionInterface.dll
+C:\Users\OmerBrookstein\Dropbox (Crestron Israel)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\bin\Debug\SimplSharpSQLHelperInterface.dll
+C:\Users\OmerBrookstein\Dropbox (Crestron Israel)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\OmerBrookstein\Dropbox (Crestron Israel)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\obj\Debug\SyncProLibrary.dll
+C:\Users\OmerBrookstein\Dropbox (Crestron Israel)\SyncPro\Code\SyncPro Modules\SyncProLibrary\SyncProLibrary\SyncProLibrary\obj\Debug\SyncProLibrary.pdb

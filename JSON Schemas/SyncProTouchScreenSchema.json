@@ -1,0 +1,89 @@
+{
+    "properties": {
+        "networkProperties": {
+            "$id": "#/properties/networkProperties",
+            "type": "object",
+            "title": "Network",
+            "description": "Device's Network Properties",
+            "required": [],
+            "properties": {
+                "macAddress": {
+                    "$id": "#/properties/networkProperties/properties/macAddress",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "title": "MAC Address",
+                    "readOnly": true
+                },
+                "ipAddress": {
+                    "$id": "#/properties/networkProperties/properties/ipAddress",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "title": "IP Address",
+                    "readOnly": true
+                }
+            }
+        },
+        "userInterfaceProperties": {
+            "$id": "#/properties/userInterfaceProperties",
+            "type": "object",
+            "title": "User Interface",
+            "required": [],
+            "properties": {
+                "hardButtons": {
+                    "$id": "#/properties/userInterfaceProperties/properties/hardButtons",
+                    "type": "object",
+                    "title": "Hard Buttons Settings",
+                    "required": [],
+                    "properties": {
+                        "powerButton": {
+                            "$id": "#/properties/userInterfaceProperties/properties/hardButtons/properties/powerButton",
+                            "$ref": "#/definitions/Toggle",
+                            "title": "Power button visibility"
+                        },
+                        "homeButton": {
+                            "$id": "#/properties/userInterfaceProperties/properties/hardButtons/properties/homeButton",
+                            "$ref": "#/definitions/Toggle",
+                            "title": "Home button visibility"
+                        },
+                        "lightsButton": {
+                            "$id": "#/properties/userInterfaceProperties/properties/hardButtons/properties/lightsButton",
+                            "$ref": "#/definitions/Toggle",
+                            "title": "Lights button visibility"
+                        },
+                        "upButton": {
+                            "$id": "#/properties/userInterfaceProperties/properties/hardButtons/properties/upButton",
+                            "$ref": "#/definitions/Toggle",
+                            "title": "Up button visibility"
+                        },
+                        "downButton": {
+                            "$id": "#/properties/userInterfaceProperties/properties/hardButtons/properties/downButton",
+                            "$ref": "#/definitions/Toggle",
+                            "title": "Down button visibility"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Toggle": {
+            "title": "Toggle",
+            "type": "number",
+            "default": 1,
+            "oneOf": [
+                {
+                    "title": "Enable",
+                    "const": 1
+                },
+                {
+                    "title": "Disable",
+                    "const": 0
+                }
+            ]
+        }
+    }
+}

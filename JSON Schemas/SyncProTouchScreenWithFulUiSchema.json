@@ -1,0 +1,359 @@
+{
+    "properties": {
+        "networkProperties": {
+            "$id": "#/properties/networkProperties",
+            "type": "object",
+            "title": "Network",
+            "description": "Device's Network Properties",
+            "required": [],
+            "properties": {
+                "network": {
+                    "$id": "#/properties/networkProperties/properties/network",
+                    "type": "string",
+                    "title": "Network",
+                    "readOnly": true,
+                    "default": "CIP"
+                },
+                "macAddress": {
+                    "$id": "#/properties/networkProperties/properties/macAddress",
+                    "type": "string",
+                    "title": "MAC Address",
+                    "readOnly": true
+                },
+                "dhcp": {
+                    "$id": "#/properties/networkProperties/properties/dhcp",
+                    "type": "boolean",
+                    "title": "DHCP"
+                },
+                "ipAddress": {
+                    "$id": "#/properties/networkProperties/properties/ipAddress",
+                    "type": "string",
+                    "format": "ipv4",
+                    "title": "IP Address",
+                    "description": "Device's ip address"
+                },
+                "maskAddress": {
+                    "$id": "#/properties/networkProperties/properties/maskAddress",
+                    "type": "string",
+                    "format": "ipv4",
+                    "title": "Mask Address",
+                    "description": "Device's mask address",
+                    "default": "255.255.255.0"
+                },
+                "defaultGateway": {
+                    "$id": "#/properties/networkProperties/properties/defaultGateway",
+                    "type": "string",
+                    "format": "ipv4",
+                    "title": "Default Gateway",
+                    "description": "Device's default Gateway"
+                }
+            },
+            "dependencies": {
+                "dhcp": {
+                    "oneOf": [
+                        {
+                            "properties": {
+                                "dhcp": {
+                                    "enum": [
+                                        true
+                                    ]
+                                },
+                                "ipAddress": {
+                                    "readOnly": true
+                                },
+                                "maskAddress": {
+                                    "readOnly": true
+                                },
+                                "defaultGateway": {
+                                    "readOnly": true
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "dhcp": {
+                                    "enum": [
+                                        false
+                                    ]
+                                },
+                                "ipAddress": {
+                                    "readOnly": false
+                                },
+                                "maskAddress": {
+                                    "readOnly": false
+                                },
+                                "defaultGateway": {
+                                    "readOnly": false
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "ipTableProperties": {
+            "$id": "#/properties/IPTableProperties",
+            "type": "object",
+            "title": "IP Table",
+            "description": "Device's IP Table Properties"
+        },
+        "authenticationProperties": {
+            "$id": "#/properties/authenticationProperties",
+            "type": "object",
+            "title": "authentication",
+            "description": "Device's Authentication Properties",
+            "required": [],
+            "properties": {
+                "authEnabled": {
+                    "$id": "#/properties/authenticationProperties/properties/authEnabled",
+                    "type": "boolean",
+                    "title": "Enable Authentication"
+                },
+                "authUsername": {
+                    "$id": "#/properties/authenticationProperties/properties/authUsername",
+                    "type": "string",
+                    "title": "Username"
+                },
+                "authPassword": {
+                    "$id": "#/properties/authenticationProperties/properties/authPassword",
+                    "type": "string",
+                    "format": "password",
+                    "title": "Password"
+                },
+                "authPasswordRetype": {
+                    "$id": "#/properties/authenticationProperties/properties/authPasswordRetype",
+                    "type": "string",
+                    "format": "password",
+                    "title": "Password"
+                }
+            },
+            "if": {
+                "properties": {
+                    "authEnabled": {
+                        "const": true
+                    }
+                }
+            },
+            "then": {
+                "required": [
+                    "authUsername,authPassword,authPasswordRetype"
+                ]
+            },
+            "else": {
+                "required": []
+            }
+        },
+        "uiProperties": {
+            "$id": "#/properties/uiProperties",
+            "type": "object",
+            "title": "UI Properties",
+            "description": "Device's Custom Properties",
+            "required": [],
+            "properties": {
+                "homePageShortcuts": {
+                    "$id": "#/properties/uiProperties/properties/homePageShortcuts",
+                    "type": "array",
+                    "title": "Home Page Shortcuts",
+                    "maxItems": 6,
+                    "items": {
+                        "$ref": "#/definitions/uiShortcut"
+                    }
+                },
+                "applications": {
+                    "$id": "#/properties/uiProperties/properties/applications",
+                    "type": "array",
+                    "title": "UI Applications",
+                    "maxItems": 8,
+                    "items": {
+                        "$ref": "#/definitions/uiApp"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "networkConfigurations": {
+            "type": "object",
+            "properties": {
+                "interface": {
+                    "type": "string"
+                },
+                "dhcp": {
+                    "type": "boolean"
+                },
+                "ip": {
+                    "type": "string",
+                    "format": "ipv4"
+                },
+                "mask": {
+                    "type": "string",
+                    "format": "ipv4"
+                },
+                "gw": {
+                    "type": "string",
+                    "format": "ipv4"
+                }
+            },
+            "required": [
+                "hostid",
+                "interface",
+                "dhcp"
+            ],
+            "switch": [
+                {
+                    "if": {
+                        "properties": {
+                            "dhcp": {
+                                "enum": [
+                                    true
+                                ]
+                            }
+                        }
+                    },
+                    "then": {
+                        "ip": {
+                            "enum": [
+                                false
+                            ]
+                        }
+                    },
+                    "else": {
+                        "required": [
+                            "ip",
+                            "mask",
+                            "gw"
+                        ]
+                    }
+                }
+            ]
+        },
+        "uiApp": {
+            "properties": {
+                "button": {
+                    "type": "object",
+                    "$ref": "#/definitions/uiButton"
+                },
+                "activities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/UiActionableButton"
+                    }
+                },
+                "actions": {}
+            }
+        },
+        "uiShortcut": {
+            "$ref": "#/definitions/UiActionableButton"
+        },
+        "activity": {},
+        "deviceAction": {
+            "type": "object",
+            "properties": {
+                "device":{
+                    "type":"string",
+                    "enum":[
+                        "Room TouchScreen",
+                        "Room Switch"
+                    ]                        
+                },
+                "actionType": {
+                    "type": "string",
+                    "enum": [
+                        "LaunchApp",
+                        "LaunchActivity"
+                    ]
+                },
+                "actionParams":{
+                    "serial":{
+                        "type":"string"
+                    },
+                    "analog":{"type":"integer"},
+                    "digital":{"type":"boolean"}
+                }
+            }
+        },
+        "UiActionableButton": {
+            "type": "object",
+            "properties": {
+                "button": {
+                    "type": "object",
+                    "$ref": "#/definitions/uiButtonWithTitle"
+                },
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/deviceAction"
+                    }
+                }
+            }
+        },
+        "uiButton": {
+            "type": "object",
+            "required": [
+                "icon"
+            ],
+            "properties": {
+                "icon": {
+                    "type": "string",
+                    "title": "Icon",
+                    "description": "The button Icon",
+                    "$ref": "#/definitions/uiIcon"
+                }
+            }
+        },
+        "uiButtonWithTitle": {
+            "type": "object",
+            "required": [
+                "title",
+                "icon"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "title": "Title",
+                    "description": "The button Title"
+                },
+                "icon": {
+                    "type": "string",
+                    "title": "Icon",
+                    "description": "The button Icon",
+                    "$ref": "#/definitions/uiIcon"
+                }
+            }
+        },
+        "uiIcon": {
+            "type": "string",
+            "enum": [
+                "Home",
+                "Help",
+                "Alert",
+                "Lights",
+                "Laptop",
+                "Wi-Fi",
+                "Phone",
+                "PhoneDown",
+                "Camera",
+                "TV",
+                "Keypad",
+                "Users",
+                "Calendar",
+                "Star",
+                "Projector",
+                "Windows",
+                "Comment",
+                "Mic",
+                "Mic Mute",
+                "Mic Muted",
+                "Volume Hi",
+                "Volume Lo",
+                "Volume Mute",
+                "Volume Muted",
+                "Address Book",
+                "Video Input",
+                "Video Output",
+                "Stop Source",
+                "Delete"
+            ]
+        }
+    }
+}

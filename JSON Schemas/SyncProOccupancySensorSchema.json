@@ -1,0 +1,35 @@
+    {
+        "definitions": {},
+        "properties": {
+            "occupancyProperties": {
+                "$id": "#/properties/occupancyProperties",
+                "type": "object",
+                "title": "Occupancy Sensot Settings",
+                "required": [
+                    "timeout",
+                    "whenVacatedMode"
+                ],
+                "properties": {
+                    "timeout": {
+                        "$id": "#/properties/occupancyProperties/properties/timeout",
+                        "type": "integer",
+                        "title": "Sensor's timout in seconds",
+                        "readOnly": false,
+                        "minimum": 5,
+                        "maximum": 1800
+                    },
+                    "whenVacatedMode": {
+                        "$id": "#/properties/occupancyProperties/properties/whenVacatedMode",
+                        "type": "string",
+                        "title": "Sensor's on vacated mode",
+                        "decription": "Sholkd I add desc",
+                        "readOnly": false,
+                        "enum":[
+                            "Or",
+                            "And"
+                        ]
+                    }
+                }
+            }
+        }
+    }

@@ -1,0 +1,388 @@
+{
+    "properties": {
+        "airMediaProperties": {
+            "$id": "#/properties/airMediaProperties",
+            "type": "object",
+            "title": "Air Media Properties",
+            "properties": {
+                "autoInputRouting": {
+                    "$id": "#/properties/airMediaProperties/properties/autoInputRouting",
+                    "type": "boolean",
+                    "title": "Auto switch by last connected",
+                    "default": true
+                },
+                "hdminInHdcpSupport": {
+                    "$id": "#/properties/airMediaProperties/properties/hdminInHdcpSupport",
+                    "type": "boolean",
+                    "title": "Auto switch by last connected",
+                    "default": true
+                },
+                "hdmiOutResolution": {
+                    "$id": "#/properties/airMediaProperties/properties/displayControl/properties/hdmiOutResolution",
+                    "type": "string",
+                    "title": "Auto switch by last connected",
+                    "enum": [
+                        "640x480@60",
+                        "800x600@60",
+                        "1024x768@60",
+                        "1280x720@50",
+                        "1280x720@60",
+                        "1280x800@60",
+                        "1280x800@60 RB",
+                        "1366x768@60",
+                        "1366x768@60 RB",
+                        "1440x900@60",
+                        "1440x900@60 RB",
+                        "1600x900@60 RB",
+                        "1600x1200@60",
+                        "1680x1050@60",
+                        "1680x1050@60 RB",
+                        "1920x1080@50",
+                        "1920x1080@60"
+                    ]
+                },
+                "loginCodeMode": {
+                    "$id": "#/properties/airMediaProperties/properties/loginCodeMode",
+                    "type": "string",
+                    "title": "Login Code Mode",
+                    "enum": [
+                        "Disabled",
+                        "Random",
+                        "Fixed"
+                    ]
+                },
+                "loginCode": {
+                    "$id": "#/properties/airMediaProperties/properties/loginCode",
+                    "type": "number",
+                    "title": "Login Code",
+                    "minimum": 0,
+                    "maximum": 9999
+                },
+                "displayCode": {
+                    "$id": "#/properties/airMediaProperties/properties/displayCode",
+                    "type": "boolean",
+                    "title": "Display AirMedia Code",
+                    "default": true
+                },
+                "displayConnectionOptions": {
+                    "$id": "#/properties/airMediaProperties/properties/displayConnectionOptions",
+                    "type": "boolean",
+                    "title": "Display AirMedia Connection Options",
+                    "default": true
+                },
+                "displayConnectionOptionsMode": {
+                    "$id": "#/properties/airMediaProperties/properties/displayConnectionOptionsMode",
+                    "type": "string",
+                    "title": "Display AirMedia Connection Options",
+                    "enum": [
+                        "IP Address",
+                        "Hostname",
+                        "Hostname and Domain",
+                        "Custom URL"
+                    ]
+                },
+                "customUrl": {
+                    "$id": "#/properties/airMediaProperties/properties/customUrl",
+                    "type": "string",
+                    "title": "AirMedia Custom Connection URL",
+                    "format": "uri"
+                }
+            },
+            "dependencies": {
+                "loginCodeMode": {
+                    "oneOf": [
+                        {
+                            "properties": {
+                                "loginCodeMode": {
+                                    "enum": [
+                                        "Disabled",
+                                        "Random"
+                                    ]
+                                },
+                                "loginCode": {
+                                    "readOnly": true
+                                },
+                                "displayCode": {
+                                    "readOnly": true
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "loginCodeMode": {
+                                    "enum": [
+                                        "Fixed"
+                                    ]
+                                },
+                                "loginCode": {
+                                    "readOnly": false
+                                }
+                            }
+                        }
+                    ]
+                },
+                "displayConnectionOptionsMode": {
+                    "oneOf": [
+                        {
+                            "properties": {
+                                "displayConnectionOptionsMode": {
+                                    "enum": [
+                                        "Custom URL"
+                                    ]
+                                },
+                                "customUrl": {
+                                    "readOnly": false
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "displayConnectionOptionsMode": {
+                                    "enum": [
+                                        "IP Address",
+                                        "Hostname",
+                                        "Hostname and Domain"
+                                    ]
+                                },
+                                "customUrl": {
+                                    "readOnly": true
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "deviceInfo": {
+            "$id": "#/properties/deviceInfo",
+            "type": "object",
+            "title": "Device Information",
+            "properties": {
+                "type": {
+                    "$id": "#/properties/generalProperties/properties/type",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "title": "Device's Type",
+                    "readOnly": false
+                },
+                "model": {
+                    "$id": "#/properties/generalProperties/properties/model",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "title": "Device's Model",
+                    "readOnly": false
+                },
+                "name": {
+                    "$id": "#/properties/generalProperties/properties/name",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "title": "Device's Name",
+                    "readOnly": false
+                },
+                "manifestUrl": {
+                    "$id": "#/properties/generalProperties/properties/manifestUrl",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "title": "Device's Manifest",
+                    "readOnly": false
+                }
+            }
+        },
+        "generalProperties": {
+            "$id": "#/properties/generalProperties",
+            "type": "object",
+            "title": "General Properties",
+            "description": "Device's General Properties",
+            "required": [],
+            "properties": {
+                "fwVersion": {
+                    "$id": "#/properties/generalProperties/properties/fwVersion",
+                    "type": "string",
+                    "title": "Device's firmware version",
+                    "readOnly": true
+                },
+                "programIDTag": {
+                    "$id": "#/properties/generalProperties/properties/programIDTag",
+                    "type": "string",
+                    "title": "Device's Program ID Tag",
+                    "readOnly": true
+                }
+            }
+        },
+        "networkProperties": {
+            "$id": "#/properties/networkProperties",
+            "type": "object",
+            "title": "Network",
+            "description": "Device's Network Properties",
+            "required": [],
+            "properties": {
+                "macAddress": {
+                    "$id": "#/properties/networkProperties/properties/macAddress",
+                    "type": "string",
+                    "title": "MAC Address",
+                    "readOnly": true
+                },
+                "dhcp": {
+                    "$id": "#/properties/networkProperties/properties/dhcp",
+                    "type": "boolean",
+                    "title": "DHCP"
+                },
+                "staticIpAddress": {
+                    "$id": "#/properties/networkProperties/properties/staticIpAddress",
+                    "type": "string",
+                    "format": "ipv4",
+                    "title": "IP Address",
+                    "description": "Device's ip address"
+                },
+                "staticNetMask": {
+                    "$id": "#/properties/networkProperties/properties/staticNetMask",
+                    "type": "string",
+                    "format": "ipv4",
+                    "title": "Mask Address",
+                    "description": "Device's mask address",
+                    "default": "255.255.255.0"
+                },
+                "staticDefRouter": {
+                    "$id": "#/properties/networkProperties/properties/staticDefRouter",
+                    "type": "string",
+                    "format": "ipv4",
+                    "title": "Default Gateway",
+                    "description": "Device's default Gateway"
+                },
+                "hostName": {
+                    "$id": "#/properties/networkProperties/properties/hostName",
+                    "type": "string",
+                    "format": "hostname",
+                    "title": "Hostname",
+                    "description": "Device's Hostname"
+                },
+                "domainName": {
+                    "$id": "#/properties/networkProperties/properties/domainName",
+                    "type": "string",
+                    "title": "Domain Name",
+                    "description": "Device's Domain"
+                },
+                "dnsServers": {
+                    "$id": "#/properties/networkProperties/properties/dnsServers",
+                    "type": "array",
+                    "title": "DNS Servers",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "description": "Device's DNS Servers",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "dependencies": {
+                "dhcp": {
+                    "oneOf": [
+                        {
+                            "properties": {
+                                "dhcp": {
+                                    "enum": [
+                                        true
+                                    ]
+                                },
+                                "staticIpAddress": {
+                                    "readOnly": true
+                                },
+                                "staticNetMask": {
+                                    "readOnly": true
+                                },
+                                "staticDefRouter": {
+                                    "readOnly": true
+                                },
+                                "dnsServers": {
+                                    "readOnly": true
+                                }
+                            }
+                        },
+                        {
+                            "properties": {
+                                "dhcp": {
+                                    "enum": [
+                                        false
+                                    ]
+                                },
+                                "staticIpAddress": {
+                                    "readOnly": false
+                                },
+                                "staticNetMask": {
+                                    "readOnly": false
+                                },
+                                "staticDefRouter": {
+                                    "readOnly": false
+                                },
+                                "dnsServers": {
+                                    "readOnly": false
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "ipTableProperties": {
+            "$id": "#/properties/IPTableProperties",
+            "type": "object",
+            "title": "IP Table",
+            "description": "Device's IP Table Properties"
+        },
+        "authenticationProperties": {
+            "$id": "#/properties/authenticationProperties",
+            "type": "object",
+            "title": "authentication",
+            "description": "Device's Authentication Properties",
+            "required": [],
+            "properties": {
+                "authEnabled": {
+                    "$id": "#/properties/authenticationProperties/properties/authEnabled",
+                    "type": "boolean",
+                    "title": "Enable Authentication"
+                },
+                "authUsername": {
+                    "$id": "#/properties/authenticationProperties/properties/authUsername",
+                    "type": "string",
+                    "title": "Username"
+                },
+                "authPassword": {
+                    "$id": "#/properties/authenticationProperties/properties/authPassword",
+                    "type": "string",
+                    "format": "password",
+                    "title": "Password"
+                },
+                "authPasswordRetype": {
+                    "$id": "#/properties/authenticationProperties/properties/authPasswordRetype",
+                    "type": "string",
+                    "format": "password",
+                    "title": "Password"
+                }
+            },
+            "if": {
+                "properties": {
+                    "authEnabled": {
+                        "const": true
+                    }
+                }
+            },
+            "then": {
+                "required": [
+                    "authUsername,authPassword,authPasswordRetype"
+                ]
+            },
+            "else": {
+                "required": []
+            }
+        }
+    },
+    "definitions": {}
+}

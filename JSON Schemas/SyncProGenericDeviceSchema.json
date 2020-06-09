@@ -1,0 +1,10 @@
+	{
+		"properties": {
+			"genericDevice": {
+				"$id": "#/properties/genericDevice",
+				"type": "object",
+				"title": "Generic Device",
+				"description": "Generic device does not have any configurations"
+			}
+		}
+	}

@@ -1,0 +1,30 @@
+{
+    "$schema": "./SyncProTouchScreenSchema.json",
+    "networkProperties": {
+        "Network":"IP",
+        "protocol":"TCP/IP",
+        "remoteHostname":"192.168.1.1",
+        "remotePort":80
+    },
+    "deviceProperties": {
+        "homePageItems": [
+            {
+                "btnTitle":"Title",
+                "btnIcon": "Camera",
+                "btnActiveIcon": "Phone"
+            },
+            {
+                "btnTitle": "Title2"
+            }
+            
+        ],
+        "applications": [
+            {
+                "btnTitle": "App1",
+                "btnIcon": "Camera",
+                "btnActiveIcon": "Phone",
+            }
+
+        ]
+    }
+}

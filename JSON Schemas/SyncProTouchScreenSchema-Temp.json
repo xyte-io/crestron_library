@@ -1,0 +1,97 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://example.com/root.json",
+    "properties": {
+        "networkProperties": {
+            "$id": "#/properties/networkProperties",
+            "type": "object",
+            "title": "Network",
+            "description": "Device's Network Properties",
+            "required": [
+                "dhcp",
+                "ipAddress",
+                "maskAddress",
+                "defaultGateway",
+                "port"
+            ],
+            "properties": {
+                "network": {
+                    "$id": "#/properties/networkProperties/properties/network",
+                    "type": "string",
+                    "title": "Network",
+                    "readOnly": true,
+                    "default": "CIP"
+                },
+                "macAddress": {
+                    "$id": "#/properties/networkProperties/properties/macAddress",
+                    "type": "string",
+                    "title": "MAC Address",
+                    "readOnly": true
+                },
+                "dhcp": {
+                    "$id": "#/properties/networkProperties/properties/dhcp",
+                    "type": "boolean",
+                    "title": "DHCP"
+                },
+                "ipAddress": {
+                    "$id": "#/properties/networkProperties/properties/network",
+                    "type": "string",
+                    "format": "ipv4",
+                    "title": "IP Address",
+                    "description": "Device's ip address"
+                },
+                "maskAddress": {
+                    "$id": "#/properties/networkProperties/properties/maskAddress",
+                    "type": "string",
+                    "format": "ipv4",
+                    "title": "Mask Address",
+                    "description": "Device's mask address",
+                    "default": "255.255.255.0"
+                },
+                "defaultGateway": {
+                    "$id": "#/properties/networkProperties/properties/defaultGateway",
+                    "type": "string",
+                    "format": "ipv4",
+                    "title": "Default Gateway",
+                    "description": "Device's default Gateway"
+                },
+                "port": {
+                    "$id": "#/properties/networkProperties/properties/network",
+                    "type": "integer",
+                    "title": "Port",
+                    "description": "Device's ip port"
+                }
+            }
+        },
+        "deviceProperties": {
+            "$id": "#/properties/deviceProperties",
+            "type": "object",
+            "title": "Device",
+            "description": "Device's Custom Properties",
+            "required": [
+                "homePageItems",
+                "applications"
+            ],
+            "properties": {
+                "homePageItems": {
+                    "$id": "#/properties/deviceProperties/properties/homePageItems",
+                    "type": "array",
+                    "title": "Home Page Shortcuts",
+                    "maxItems": 6,
+                    "items": {
+                        "type":"string"
+                    }
+                },
+                "applications": {
+                    "$id": "#/properties/deviceProperties/properties/applications",
+                    "type": "array",
+                    "title": "UI Applications",
+                    "maxItems": 8,
+                    "items": {
+                        "type":"string"
+                    }
+                }
+            }
+        }
+    }
+}
