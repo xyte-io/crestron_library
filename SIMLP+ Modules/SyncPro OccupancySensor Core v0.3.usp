@@ -1,0 +1,178 @@
+/*******************************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+*******************************************************************************************/
+/*
+Dealer Name: SyncPro
+System Name: SyncPro Modules Library
+Programmer: OB (2020)
+*/
+
+//Compiler Directives
+#SYMBOL_NAME "SyncPro Occupancy Sensor Core v0.3"
+#CATEGORY "0" 
+
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+#PRINT_TO_TRACE
+#ENCODING_UTF16
+
+//Constants
+#DEFINE_CONSTANT TRUE 1
+#DEFINE_CONSTANT FALSE 0
+
+#DEFINE_CONSTANT DEBUG TRUE
+#DEFINE_CONSTANT PULSE_TIME 50	//50 milliseconds
+
+//Constants
+#DEFINE_CONSTANT NUMBER_OF_APPS 10
+#DEFINE_CONSTANT NUMBER_OF_HOMEPAGE_SHORTCUTS 6
+#DEFINE_CONSTANT MAX_KEY_VALUE_LENGTH 100
+
+
+
+#HELP_BEGIN
+   This is the core module for a SyncPro Occupancy Sensor.
+   For more information - https://spdocs.syncpro.io/syncpro-modules/syncpros-crestron-modules
+#HELP_END
+
+
+//Include Libraries  
+#USER_SIMPLSHARP_LIBRARY "SyncProLibrary"
+
+//Generic device properties
+//Inputs
+digital_input _SKIP_,_SKIP_,GetDeviceInfo,GetDeviceConfig,SetDeviceConfig,_SKIP_,DeviceOffline, DeviceOnline;
+string_input _SKIP_,_SKIP_,DeviceCommonTelemetryMsg$[MAX_KEY_VALUE_LENGTH];
+
+
+//Occupancy Sensor
+//Outputs
+digital_output _SKIP_,_SKIP_,_SKIP_;
+string_output _SKIP_,_SKIP_, DeviceModel$,DeviceName$,_SKIP_;
+
+//Inputs
+digital_input _SKIP_,_SKIP_;
+digital_input OrWhenVacant_fb,AndWhenVacant_fb;
+analog_input _SKIP_,Timeout_Fb;
+//string_input _SKIP_,DeviceConfig$[65534];
+
+
+
+//General device properties
+//Device - Occupancy Sensor
+digital_output OrWhenVacated,AndWhenVacated;
+analog_output _SKIP_,Timeout;
+
+//Parameters
+STRING_PARAMETER DeviceUuid[36];
+STRING_PARAMETER DeviceAccessKey[450];
+
+/*******************************************************************************************
+		Global Variables
+*******************************************************************************************/
+OccupancySensor device;
+
+
+/*******************************************************************************************
+		Generic Functions
+*******************************************************************************************/
+function Initialize()
+{
+	device.InitDevice(DeviceUuid,DeviceAccessKey);
+	//Online-offlince
+	if (DeviceOffline)
+		device.UpdateStatus("offline");
+
+	else
+		device.UpdateStatus("online");
+
+}
+
+
+/*******************************************************************************************
+		Event Handlers
+*******************************************************************************************/
+eventhandler UpdaterDeviceInfo(OccupancySensor sender, DeviceInfo info)
+{
+	DeviceModel$=device.deviceInfo.manufacturer.model;	
+	DeviceName$=device.deviceInfo.name;
+}
+
+//This is called whenever the S# module downloads and saves a new configuration file.
+//It is used to push the device's config to Simpl
+eventhandler UpdateConfigHandler(OccupancySensor sender, SyncProDeviceConfig config)
+{
+	//Report occupancy Sensor fields
+	Timeout = device.deviceConfig.occupancyProperties.timeout;
+	
+	if (device.deviceConfig.occupancyProperties.whenVacatedMode = "Or")
+		PULSE(PULSE_TIME,OrWhenVacated);
+	if (device.deviceConfig.occupancyProperties.whenVacatedMode = "And")
+		PULSE(PULSE_TIME,AndWhenVacated);
+}
+
+
+
+/*******************************************************************************************
+		Generic SIMPL events
+*******************************************************************************************/
+push GetDeviceInfo{device.GetDeviceInformation(); }
+
+push GetDeviceConfig
+{
+	device.GetAndApplyDeviceConfigurations();
+}
+
+push SetDeviceConfig
+{
+	device.SetDeviceConfigurations();
+}   
+
+push DeviceOffline{
+	device.UpdateStatus("offline");
+}
+
+push DeviceOnline{
+	device.UpdateStatus("online");
+}
+        
+//Sends device's telemetery
+//string stracture should be validated json format representing a Telemetery message object - 
+//"common":{"Key":"commonKey","Value":"value"}
+//"custom":{"Key":"customKey","Value":"value"}
+
+change DeviceCommonTelemetryMsg${
+	device.SendCommonTelemetry(DeviceCommonTelemetryMsg$);
+}
+
+/*******************************************************************************************
+		Occupancy sensor SIMPL events
+*******************************************************************************************/
+//Set configurations
+change Timeout_Fb{
+	device.SetTimeout(Timeout_fb);
+}
+
+push OrWhenVacant_fb{
+	device.SetWhenVacatedMode("Or");
+}
+
+push AndWhenVacant_fb{
+		device.SetWhenVacatedMode("And");
+}
+
+//Main Function
+Function Main()
+{
+	WaitForInitializationComplete();
+	
+	//Register to events
+	RegisterEvent(device, DeviceInfoUpdate, UpdaterDeviceInfo);
+	RegisterEvent(device, ConfigUpdate, UpdateConfigHandler);
+ 
+	Initialize();
+}
+
+

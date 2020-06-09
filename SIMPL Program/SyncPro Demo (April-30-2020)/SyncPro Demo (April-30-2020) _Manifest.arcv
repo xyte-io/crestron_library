@@ -1,0 +1,99 @@
+[BEGIN]
+  ObjTp=FSgntr
+  Sgntr=ArchiveManifest
+  RelVrs=4.11.06
+  IsProgram=1
+  TopLevelProgram=SyncPro Demo (April-30-2020) .smw
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro Demo (April-30-2020) .smw
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro Demo (April-30-2020) .sig
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro Demo (April-30-2020) .lpz
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro Demo (April-30-2020) .smft
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro Demo (April-30-2020) .lpz.hash
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Telemetry Format.ush
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncProLibrary.clz
+  Scope=2
+  Module=Telemetry Format.ush
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro 3-Series v0.3.umc
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro 3-Series Core v0.3.ush
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncProLibrary.clz
+  Scope=2
+  Module=SyncPro 3-Series Core v0.3
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro TouchScreen v0.3.umc
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro TouchScreen Core v0.3.ush
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro OccupancySensor v0.3.umc
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro OccupancySensor Core v0.3.ush
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro Generic Device v0.3.umc
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro Generic Device Core v0.3.ush
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro Generic Display v0.3.umc
+  Scope=2
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=SyncPro Generic VC-TC v0.3.umc
+  Scope=2
+[END]

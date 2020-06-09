@@ -1,0 +1,121 @@
+/*******************************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+*******************************************************************************************/
+/*
+Dealer Name: SyncPro
+System Name: SyncPro Modules Library
+Programmer: OB (2020)
+*/
+
+//Compiler Directives
+#SYMBOL_NAME "SyncPro 3-Series Core v0.3"
+#CATEGORY "0" 
+
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+#PRINT_TO_TRACE
+#ENCODING_UTF16
+
+//Constants
+#DEFINE_CONSTANT TRUE 1
+#DEFINE_CONSTANT FALSE 0
+
+#DEFINE_CONSTANT DEBUG TRUE
+#DEFINE_CONSTANT PULSE_TIME 50	//50 milliseconds
+
+//Constants
+#DEFINE_CONSTANT NUMBER_OF_APPS 10
+#DEFINE_CONSTANT NUMBER_OF_HOMEPAGE_SHORTCUTS 6
+#DEFINE_CONSTANT MAX_KEY_VALUE_LENGTH 100
+
+
+#HELP_BEGIN
+   This is the core module for a SyncPro Custom device.
+   For more information - https://spdocs.syncpro.io/syncpro-modules/syncpros-crestron-modules
+#HELP_END
+
+
+//Include Libraries  
+#USER_SIMPLSHARP_LIBRARY "SyncProLibrary"
+
+//Generic device properties
+//Inputs
+digital_input _SKIP_,_SKIP_,GetDeviceInfo,GetDeviceConfig,SetDeviceConfig;
+string_input _SKIP_,DeviceCommonTelemetryMsg$[MAX_KEY_VALUE_LENGTH];
+
+//Outputs
+digital_output _SKIP_,_SKIP_,_SKIP_,_SKIP_;
+string_output _SKIP_,DeviceModel$,DeviceName$,_SKIP_$;
+
+//Parameters
+STRING_PARAMETER DeviceUuid[36];
+STRING_PARAMETER DeviceAccessKey[450];
+
+/*******************************************************************************************
+		Global Variables
+*******************************************************************************************/
+ThreeSeriesControlSystem device;
+
+/*******************************************************************************************
+		Event Handlers
+*******************************************************************************************/
+eventhandler UpdaterDeviceInfo(ThreeSeriesControlSystem sender, DeviceInfo info)
+{
+	DeviceModel$=device.deviceInfo.manufacturer.model;	
+	DeviceName$=device.deviceInfo.name;
+	
+}
+
+//This is called whenever the S# module downloads and saves a new configuration file.
+//It is used to push the device's config to Simpl
+eventhandler UpdateConfigHandler(SyncProDevice sender, SyncProDeviceConfig config)
+{
+}
+
+/*******************************************************************************************
+		Generic Functions
+*******************************************************************************************/
+function Initialize()
+{
+	device.InitDevice(DeviceUuid,DeviceAccessKey);
+}
+
+/*******************************************************************************************
+		Generic SIMPL events
+*******************************************************************************************/
+push GetDeviceConfig
+{
+	device.GetAndApplyDeviceConfigurations();
+}
+
+push SetDeviceConfig
+{
+	device.SetDeviceConfigurations();
+}    
+
+push GetDeviceInfo{
+	device.GetDeviceInformation();
+} 
+        
+//Sends device's telemetery
+//string stracture should be validated json format representing a Telemetery message object - 
+//"common":{"Key":"commonKey","Value":"value"}
+//"custom":{"Key":"customKey","Value":"value"}
+change DeviceCommonTelemetryMsg${
+	device.SendCommonTelemetry(DeviceCommonTelemetryMsg$);
+}
+
+//Main Function
+Function Main()
+{
+	WaitForInitializationComplete();
+
+	//Register to events	
+	RegisterEvent(device, DeviceInfoUpdate, UpdaterDeviceInfo);
+	RegisterEvent(device, ConfigUpdate, UpdateConfigHandler);
+	Initialize();
+}
+
+
